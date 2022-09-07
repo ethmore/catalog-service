@@ -23,6 +23,10 @@ type GetProductResponse struct {
 	Id    string
 }
 
+type Products struct {
+	Products []Product
+}
+
 func GetAllProducts() ([]Product, error) {
 	jsonBody := []byte(`{"client_message": "to server!"}`)
 	bodyReader := bytes.NewReader(jsonBody)
@@ -50,12 +54,12 @@ func GetAllProducts() ([]Product, error) {
 	}
 	defer res.Body.Close()
 
-	var products []Product
+	var products Products
 	if unmarshalErr := json.Unmarshal([]byte(b), &products); err != nil {
 		return nil, unmarshalErr
 	}
 
-	return products, nil
+	return products.Products, nil
 }
 
 func GetProduct(requestBody GetProductResponse) (*Product, error) {
