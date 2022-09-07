@@ -17,5 +17,7 @@ func main() {
 	public := router.Group("/")
 	routes.PublicRoutes(public)
 
-	router.Run(":3005")
+	if err := router.Run(":3005"); err != nil {
+		panic(err)
+	}
 }

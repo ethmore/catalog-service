@@ -67,7 +67,11 @@ func GetAllProducts() gin.HandlerFunc {
 		defer res.Body.Close()
 
 		var resp Response
-		json.Unmarshal([]byte(b), &resp)
+		if err := json.Unmarshal([]byte(b), &resp); err != nil {
+			fmt.Println("unmarshal err", err)
+			ctx.Status(http.StatusInternalServerError)
+			return
+		}
 		ctx.JSON(200, gin.H{"message": "OK", "products": resp})
 	}
 }
@@ -113,7 +117,11 @@ func GetProduct() gin.HandlerFunc {
 		defer res.Body.Close()
 
 		var resp ProductResponse
-		json.Unmarshal([]byte(b), &resp)
+		if err := json.Unmarshal([]byte(b), &resp); err != nil {
+			fmt.Println("unmarshal err", err)
+			ctx.Status(http.StatusInternalServerError)
+			return
+		}
 		ctx.JSON(200, gin.H{"message": "OK", "productInfo": resp})
 	}
 }
