@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"catalog/dotEnv"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"time"
@@ -16,8 +17,12 @@ type Product struct {
 	Description string
 	Image       string
 	Stock       string
+	SellerID    string
 }
 
+type ProductResp struct {
+	Product Product
+}
 type GetProductResponse struct {
 	Token string
 	Id    string
@@ -90,10 +95,10 @@ func GetProduct(requestBody GetProductResponse) (*Product, error) {
 	}
 	defer res.Body.Close()
 
-	var product Product
+	var product ProductResp
 	if unmarshalErr := json.Unmarshal([]byte(b), &product); err != nil {
 		return nil, unmarshalErr
 	}
-
-	return &product, nil
+	fmt.Println(product)
+	return &product.Product, nil
 }
