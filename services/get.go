@@ -2,7 +2,7 @@ package services
 
 import (
 	"bytes"
-	"catalog/dotEnv"
+	"catalog-service/dotEnv"
 	"encoding/json"
 	"fmt"
 	"io"

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"catalog/dotEnv"
-	"catalog/routes"
+	"catalog-service/dotEnv"
+	"catalog-service/routes"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"

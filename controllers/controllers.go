@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"catalog/services"
+	"catalog-service/services"
 	"fmt"
 	"net/http"
 
